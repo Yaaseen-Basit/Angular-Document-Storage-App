@@ -1,0 +1,16 @@
+<div class="cardupload flex-container center">
+
+<form (ngSubmit)="signUp()">
+  <div class="form-outline mb-4">
+    <label class="form-label" for="email">Your Email</label>
+    <input type="email" id="email" name="email" [(ngModel)]="email" placeholder="Email" required class="form-control form-control-lg" />
+  </div>
+  <div class="form-outline mb-4">
+    <label class="form-label" for="password">Password</label>
+    <input type="password" id="password" name="password" [(ngModel)]="password" placeholder="Password" required class="form-control form-control-lg" />
+  </div>
+  <div class="d-flex justify-content-center">
+    <button type="submit" mat-raised-button color="primary">Create Account</button>
+  </div>
+</form>
+</div>

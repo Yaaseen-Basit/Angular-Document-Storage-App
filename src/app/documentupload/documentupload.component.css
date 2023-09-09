@@ -1,0 +1,27 @@
+.label {
+    color: white;
+    padding: 8px;
+  }
+  .info {
+    background-color: #673ab7;
+    color: #fff;
+} 
+.card {
+    border: 1px solid rgb(255 255 255 / 10%);
+    border-radius: 12px;
+    background-color: transparent;
+    padding: 16px;
+    overflow: hidden;
+}
+
+.submit {
+    background-color: #673ab7;
+    color: #fff;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    min-width: 64px;
+   }
+   
