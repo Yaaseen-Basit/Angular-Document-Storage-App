@@ -1,4 +1,4 @@
-
+<!-- 
 <div class="cardupload flex-container center">
   <form>
     <h1 class="fontheading">Upload your Document here:</h1>
@@ -36,4 +36,39 @@
       </div>
     </div>
   </form>
+</div> -->
+<div class="cardupload flex-container center">
+  <form>
+    <h1 class="fontheading">Upload your Document here:</h1>
+    <br>
+    <br>
+    <div class="form-group row">
+      <div class="col-md-10">
+        <label class="label info">
+          <input type="file" class="text-nowrap text-truncate" (change)="selectFile($event)" />
+        </label>
+      </div>
+    </div>
+    <br>
+    <div class="form-group row">
+      <div class="col-md-10">
+        <button mat-raised-button color="primary" [disabled]="!selectedFiles" (click)="upload()">Upload</button>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-md-10">
+        <div *ngIf="currentFileUpload" class="progress mt-2">
+          <div
+            class="progress-bar progress-bar-info"
+            role="progressbar"
+            [style.width.%]="percentage"
+            aria-valuemin="0"
+            aria-valuemax="100">
+            {{ percentage }}%
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
 </div>
+

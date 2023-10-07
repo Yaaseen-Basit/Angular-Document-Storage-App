@@ -4,51 +4,34 @@ import { AngularFireStorage } from '@angular/fire//compat/storage';
 import { Observable ,map} from 'rxjs';
 import { finalize ,filter} from 'rxjs/operators';
 import { FileUpload } from './models/fileupload';
+import { ToastrService } from 'ngx-toastr'; 
+import { Router } from '@angular/router';
+
 @Injectable({
   providedIn: 'root'
 })
 export class DocumentuploadSService {
 
-
-  // uploadDocument(file: File): AngularFireUploadTask {
-  //   const filePath = `documentscollection/${file.name}`;
-  //   const fileRef = this.storage.ref(filePath);
-  //   return this.storage.upload(filePath, file);
-
-    // Monitor the upload progress and handle completion or errors
-  // task.snapshotChanges().subscribe(
-  //   (snapshot) => {
-  //     if (snapshot.state === 'success') {
-  //       // File uploaded successfully
-  //       console.log('Upload complete');
-  //     }
-  //   },
-  //   (error) => {
-  //     // Handle the error
-  //     console.error('Upload error:', error);
-  //   }
-  // );
   private basePath = '/docuploads';
 
-  constructor(private db: AngularFireDatabase, private storage: AngularFireStorage) { }
+  constructor(private db: AngularFireDatabase, private router:Router,private storage: AngularFireStorage,private toastr: ToastrService ) { }
+  async deleteFileByName(fileName: string): Promise<void> {
+    try {
+      // Create a storage reference to the file by name
+      const fileRef = this.storage.ref(fileName);
 
-  // pushFileToStorage(fileUpload: FileUpload): Observable<number> {
-  //   const filePath = `${this.basePath}/${fileUpload.file.name}`;
-  //   const storageRef = this.storage.ref(filePath);
-  //   const uploadTask = this.storage.upload(filePath, fileUpload.file);
+      // Delete the file from Firebase Storage
+      await fileRef.delete().toPromise();
 
-  //   uploadTask.snapshotChanges().pipe(
-  //     finalize(() => {
-  //       storageRef.getDownloadURL().subscribe(downloadURL => {
-  //         fileUpload.url = downloadURL;
-  //         fileUpload.name = fileUpload.file.name;
-  //         this.saveFileData(fileUpload);
-  //       });
-  //     })
-  //   ).subscribe();
+      // Show a success toast notification
+      this.toastr.success(`File '${fileName}' deleted successfully`, 'Success');
+    } catch (error) {
+      const castedError = error as Error; // Cast error to the 'Error' type
+      // Show an error toast notification
+      this.toastr.error(`Error deleting file: ${castedError.message}`, 'Error');
+      throw castedError;    }
+  }
 
-  //   return uploadTask.percentageChanges();
-  // }
   pushFileToStorage(fileUpload: FileUpload): Observable<number> {
     const filePath = `${this.basePath}/${fileUpload.file.name}`;
     const storageRef = this.storage.ref(filePath);
@@ -60,6 +43,9 @@ export class DocumentuploadSService {
           fileUpload.url = downloadURL;
           fileUpload.name = fileUpload.file.name;
           this.saveFileData(fileUpload);
+          this.toastr.success(`File '${fileUpload.file.name}' uploaded successfully`, 'Success');
+          this.router.navigate(['/dashboard']); 
+
         });
       })
     ).subscribe();

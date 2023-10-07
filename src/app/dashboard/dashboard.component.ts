@@ -8,35 +8,24 @@ import {AfterViewInit, Component,OnInit, ViewChild} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import { Router } from '@angular/router';
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  // documents: any[] = [];
-
-  // constructor(private documentService: DocumentserviceService) { }
-
-  // ngOnInit() {
-  //   this.documentService.getDocuments().subscribe(documents => {
-  //     this.documents = documents;
-  //   });
-  // }
-  // documents$!: Observable<any[]>;
-
-  // constructor(private firestore: AngularFirestore) { }
-
-  // ngOnInit(): void {
-  //   this.documents$ = this.firestore.collection('documentscollection').valueChanges();
-  //   console.log("this.documents$>>>>>",this.documents$)
-  // }
-  // fileUploads: any[];
   
   fileUploads: any[] = []; 
-  constructor(private uploadService: DocumentuploadSService,private router:Router) { }
+  
 
+  constructor(private uploadService: DocumentuploadSService,private router:Router,private toastr: ToastrService) { }
+  async deleteFile(fileName:string) {
+    try {
+      await this.uploadService.deleteFileByName(fileName);
+    } catch (error) {
+    }
+  }
   ngOnInit(): void {
     this.uploadService.getFiles(6).snapshotChanges().pipe(
       map(changes =>
@@ -51,7 +40,7 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  displayedColumns: string[] = ['SrNo', 'name','Action' ];
+  displayedColumns: string[] = ['SrNo', 'name','Action','Delete' ];
 
   public dataSource = new MatTableDataSource();
   @ViewChild(MatPaginator) paginator :any = MatPaginator;

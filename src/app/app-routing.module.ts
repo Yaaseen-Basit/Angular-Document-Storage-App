@@ -18,8 +18,8 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'documents/:id', component: DocumentdetailsComponent },
 
-  // Add more routes for other pages
-  { path: '', redirectTo: 'dashboard', pathMatch: 'full' }, // Default route
+  // { path: '', redirectTo: 'dashboard', pathMatch: 'full' }, // Default route
+  { path: '', redirectTo: 'login', pathMatch: 'full' }, // Default route
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

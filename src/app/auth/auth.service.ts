@@ -3,14 +3,14 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { User } from 'firebase/auth';
-
+import { ToastrService } from 'ngx-toastr'; 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 userData$: Observable<any>;
 
-  constructor(private angularFireAuth: AngularFireAuth, private router: Router) {
+  constructor(private angularFireAuth: AngularFireAuth, private router: Router,private toastr: ToastrService) {
     this.userData$ = angularFireAuth.authState;
   }
   isLoggedIn(): boolean {
@@ -20,10 +20,13 @@ SignUp(email: string, password: string) {
   this.angularFireAuth.createUserWithEmailAndPassword(email, password)
     .then((userCredential) => {
       const user = userCredential.user;
-      console.log('Successfully signed up!', user);
+      this.toastr.success('Account created successfully!', 'Success');
+      this.router.navigate(['/login']); 
+
     })
     .catch((error) => {
-      console.log('Something is wrong:', error.message);
+      this.toastr.error('Error creating account: ' + error.message, 'Error');
+
     });
 }
 

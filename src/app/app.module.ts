@@ -29,6 +29,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr'; 
 
 @NgModule({
   declarations: [
@@ -42,9 +43,11 @@ import { ReactiveFormsModule } from '@angular/forms';
     SignupComponent 
   ],
   imports: [
-    BrowserModule, FormsModule,   AngularFireModule.initializeApp(environment.firebaseConfig),AngularFirestoreModule, 
+    BrowserModule, FormsModule,  AngularFireModule.initializeApp(environment.firebaseConfig),AngularFirestoreModule, 
     AppRoutingModule,AngularFireDatabaseModule,MatToolbarModule, MatIconModule, MatSidenavModule, MatListModule, MatButtonModule,
-    AngularFireStorageModule,BrowserAnimationsModule,MatFormFieldModule,MatCardModule,MatTableModule, MatPaginatorModule,ReactiveFormsModule
+    AngularFireStorageModule,BrowserAnimationsModule,MatFormFieldModule,MatCardModule,MatTableModule, MatPaginatorModule,
+    ReactiveFormsModule, ToastrModule.forRoot() // Add ToastrModule with its configuration
+ 
   ],
   providers: [],
   bootstrap: [AppComponent]

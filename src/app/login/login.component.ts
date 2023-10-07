@@ -9,11 +9,15 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms'; // Import t
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+  likeCount = 1;
+  shareCount = 1;
   loginForm: FormGroup;
   emailRequiredError: boolean = false; 
   passwordRequiredError: boolean = false;
   userData$ = this.authenticationService.userData$;
+  longText = `Welcome to our Document Management System (DMS), where we are committed to revolutionizing the way organizations handle, store, and retrieve their important documents. At YBSoftwareEngineeringVlogz, we understand the challenges that businesses face when managing a multitude of documents, from invoices and contracts to reports and presentations.
 
+  Our mission is to provide a comprehensive and user-friendly solution that streamlines document-related processes, enhances productivity, and ensures the security and accessibility of your valuable information.`;
   email: string = '';
   password: string = '';
   constructor(public authenticationService: AuthService, private formBuilder: FormBuilder) {
@@ -22,6 +26,13 @@ export class LoginComponent {
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
    }
+   like() {
+    this.likeCount++;
+  }
+  
+  share() {
+    this.shareCount++;
+  }
   signUp() {
     this.authenticationService.SignUp(this.email, this.password);
     this.email = '';
@@ -48,6 +59,7 @@ export class LoginComponent {
         }
       }
     }
+    
     // signOut() 
     //  {
     //   this.authenticationService.SignOut();

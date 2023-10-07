@@ -4,22 +4,21 @@
       <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
     </button>
     <h1>Document Management</h1>
-    <span class="menu-spacer"></span>
-    <div>
-      <a  mat-button routerLink="/login" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="tab-link"> Login </a> 
-      <a mat-button routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="tab-link"> Dashboard </a>
-      <!-- <a mat-button routerLink="/signup" *ngIf="!isLoggedIn" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="tab-link"> Create Account </a> -->
-      <a mat-button routerLink="/upload" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="tab-link"> Upload Document </a>
-      <a mat-button [routerLink]="'/logout'" class="tab-link">logout</a>
-      <a mat-button *ngIf="isLoggedIn" (click)="logout()" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="tab-link">Logout</a>
-
+    <span flex></span> 
+    <span flex></span> 
+    <div class="menu-container">
+      <div class="menu-items">
+        <span flex></span> 
+       <a mat-button *ngIf="!isLoggedIn" routerLink="login" routerLinkActive="active" [class.active]="isActive('login')"   class="tab-link"> Login </a>
+        <a mat-button *ngIf="isLoggedIn" routerLink="dashboard" routerLinkActive="active" [class.active]="isActive('dashboard')"   class="tab-link"> Dashboard </a>
+        <a mat-button routerLink="/upload" [class.active]="isActive('upload')" *ngIf="isLoggedIn" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="tab-link"> Upload Document </a>
+        <a mat-button *ngIf="isLoggedIn" (click)="logout()" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="tab-link">Logout</a>
+        <a mat-button *ngIf="!isLoggedIn" [class.active]="isActive('signup')" [routerLink]="'signup'" class="tab-link">Sign Up</a>
+      </div>
     </div>
-    
   </mat-toolbar-row>
 
-  <mat-toolbar-row color="primary"   style="min-height: 15px !important; height: 15px !important;">
-    <span style="font-size: 10px;">Simple Document Management helps you easily
-      manage your
-      document</span>
+  <mat-toolbar-row color="primary" style="min-height: 15px !important; height: 15px !important;">
+    <span style="font-size: 10px;">Simple Document Management helps you easily manage your document</span>
   </mat-toolbar-row>
 </mat-toolbar>
