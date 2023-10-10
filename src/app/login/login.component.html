@@ -10,8 +10,8 @@
       <p>{{longText}}</p>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-button>LIKE <mat-icon>thumb_up</mat-icon>{{ likeCount }}</button>
-      <button mat-button>SHARE <mat-icon>share</mat-icon> {{ shareCount }}</button>
+      <button mat-button (click)="like()" >LIKE <mat-icon>thumb_up</mat-icon>{{ likeCount }}</button>
+      <button mat-button (click)="share()" >SHARE <mat-icon>share</mat-icon> {{ shareCount }}</button>
     </mat-card-actions>
   </mat-card>
   

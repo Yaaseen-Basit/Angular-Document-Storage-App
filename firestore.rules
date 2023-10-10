@@ -1,7 +1,7 @@
 rules_version = '2';
 service firebase.storage {
   match /b/{bucket}/o {
-    match /doccollection/{allPaths=**} {
+    match /documentdb/{allPaths=**} {
       allow read, write;
     }
   }

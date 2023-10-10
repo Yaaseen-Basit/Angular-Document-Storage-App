@@ -15,23 +15,43 @@ export class DocumentuploadSService {
   private basePath = '/docuploads';
 
   constructor(private db: AngularFireDatabase, private router:Router,private storage: AngularFireStorage,private toastr: ToastrService ) { }
+  // async deleteFileByName(fileName: string): Promise<void> {
+  //   try {
+  //     // Create a storage reference to the file by name
+  //     const fileRef = this.storage.ref(fileName);
+
+  //     // Delete the file from Firebase Storage
+  //     await fileRef.delete().toPromise();
+
+  //     // Show a success toast notification
+  //     this.toastr.success(`File '${fileName}' deleted successfully`, 'Success');
+  //   } catch (error) {
+  //     const castedError = error as Error; // Cast error to the 'Error' type
+  //     // Show an error toast notification
+  //     this.toastr.error(`Error deleting file: ${castedError.message}`, 'Error');
+  //     throw castedError;    }
+  // }
   async deleteFileByName(fileName: string): Promise<void> {
     try {
-      // Create a storage reference to the file by name
-      const fileRef = this.storage.ref(fileName);
-
+      // Construct the full path to the file, including the base path
+      const basePath = 'docuploads'; // Replace with your actual base path
+      const fullPath = `${basePath}/${fileName}`;
+     const fileRef = this.storage.ref(fullPath); // Provide the 'fullPath' as an argument
+  
       // Delete the file from Firebase Storage
       await fileRef.delete().toPromise();
-
+  
       // Show a success toast notification
       this.toastr.success(`File '${fileName}' deleted successfully`, 'Success');
+      this.router.navigate(['/dashboard']); 
     } catch (error) {
       const castedError = error as Error; // Cast error to the 'Error' type
       // Show an error toast notification
       this.toastr.error(`Error deleting file: ${castedError.message}`, 'Error');
-      throw castedError;    }
+      throw castedError;
+    }
   }
-
+  
   pushFileToStorage(fileUpload: FileUpload): Observable<number> {
     const filePath = `${this.basePath}/${fileUpload.file.name}`;
     const storageRef = this.storage.ref(filePath);

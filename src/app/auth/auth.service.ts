@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { User } from 'firebase/auth';
 import { ToastrService } from 'ngx-toastr'; 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -35,7 +36,6 @@ SignIn(email: string, password: string): void {
   this.angularFireAuth.signInWithEmailAndPassword(email, password)
     .then((userCredential) => {
       console.log('Successfully signed in!');
-      // You can access user information from userCredential.user if needed
     })
     .catch((error) => {
       console.log('Something went wrong:', error.message);
@@ -47,6 +47,8 @@ SignOut(): void {
   this.angularFireAuth.signOut()
     .then(() => {
       console.log('Successfully signed out!');
+      this.toastr.success(`Successfully signed out!`, 'Success');
+
       this.router.navigate(['/login']); 
     })
     .catch((error) => {

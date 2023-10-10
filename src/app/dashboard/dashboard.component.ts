@@ -24,6 +24,7 @@ export class DashboardComponent implements OnInit {
     try {
       await this.uploadService.deleteFileByName(fileName);
     } catch (error) {
+      this.toastr.error('This File Cannot be deleted' );
     }
   }
   ngOnInit(): void {

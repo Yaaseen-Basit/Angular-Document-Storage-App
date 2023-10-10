@@ -9,11 +9,15 @@
     <div class="menu-container">
       <div class="menu-items">
         <span flex></span> 
-       <a mat-button *ngIf="!isLoggedIn" routerLink="login" routerLinkActive="active" [class.active]="isActive('login')"   class="tab-link"> Login </a>
-        <a mat-button *ngIf="isLoggedIn" routerLink="dashboard" routerLinkActive="active" [class.active]="isActive('dashboard')"   class="tab-link"> Dashboard </a>
-        <a mat-button routerLink="/upload" [class.active]="isActive('upload')" *ngIf="isLoggedIn" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="tab-link"> Upload Document </a>
-        <a mat-button *ngIf="isLoggedIn" (click)="logout()" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="tab-link">Logout</a>
-        <a mat-button *ngIf="!isLoggedIn" [class.active]="isActive('signup')" [routerLink]="'signup'" class="tab-link">Sign Up</a>
+       <a mat-button *ngIf="!isLoggedIn" routerLink="login" routerLinkActive="active" [class.active]="isActive('login')"   class="tab-link"><mat-icon aria-hidden="false">login</mat-icon>
+        Login </a>
+        <a mat-button *ngIf="isLoggedIn" routerLink="dashboard" routerLinkActive="active" [class.active]="isActive('dashboard')"   class="tab-link"> <mat-icon>dashboard</mat-icon>
+          Dashboard </a>
+        <a mat-button routerLink="/upload" [class.active]="isActive('upload')" *ngIf="isLoggedIn" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="tab-link"> <mat-icon>cloud_upload</mat-icon>Upload Document </a>
+        <a mat-button *ngIf="isLoggedIn" (click)="logout()" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="tab-link"><mat-icon aria-hidden="false">login</mat-icon>
+          Logout</a>
+        <a mat-button *ngIf="!isLoggedIn" [class.active]="isActive('signup')" [routerLink]="'signup'" class="tab-link"><mat-icon>account_box</mat-icon>
+          Sign Up</a>
       </div>
     </div>
   </mat-toolbar-row>

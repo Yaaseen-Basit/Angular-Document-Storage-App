@@ -16,7 +16,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent,  },
 
   { path: 'signup', component: SignupComponent },
-  { path: 'documents/:id', component: DocumentdetailsComponent },
+  { path: 'documents/:id', component: DocumentdetailsComponent,canActivate: [AuthGuard] },
 
   // { path: '', redirectTo: 'dashboard', pathMatch: 'full' }, // Default route
   { path: '', redirectTo: 'login', pathMatch: 'full' }, // Default route

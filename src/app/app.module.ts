@@ -30,6 +30,7 @@ import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr'; 
+import { MatSnackBarModule } from '@angular/material/snack-bar'; // Import MatSnackBarModule
 
 @NgModule({
   declarations: [
@@ -46,7 +47,7 @@ import { ToastrModule } from 'ngx-toastr';
     BrowserModule, FormsModule,  AngularFireModule.initializeApp(environment.firebaseConfig),AngularFirestoreModule, 
     AppRoutingModule,AngularFireDatabaseModule,MatToolbarModule, MatIconModule, MatSidenavModule, MatListModule, MatButtonModule,
     AngularFireStorageModule,BrowserAnimationsModule,MatFormFieldModule,MatCardModule,MatTableModule, MatPaginatorModule,
-    ReactiveFormsModule, ToastrModule.forRoot() // Add ToastrModule with its configuration
+    ReactiveFormsModule,MatSnackBarModule, ToastrModule.forRoot() // Add ToastrModule with its configuration
  
   ],
   providers: [],
